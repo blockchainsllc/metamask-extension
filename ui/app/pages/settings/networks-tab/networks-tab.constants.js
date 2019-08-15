@@ -7,8 +7,14 @@ const defaultNetworksData = [
     chainId: '1',
     ticker: 'ETH',
     blockExplorerUrl: 'https://etherscan.io',
-  },
-  {
+  }, {
+    labelKey: 'mainnet',
+    iconColor: '#29B6AF',
+    providerType: 'in3_mainnet',
+    chainId: '1',
+    ticker: 'ETH',
+    blockExplorerUrl: 'https://etherscan.io',
+  }, {
     labelKey: 'ropsten',
     iconColor: '#FF4A8D',
     providerType: 'ropsten',

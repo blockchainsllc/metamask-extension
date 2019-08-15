@@ -15,7 +15,7 @@ module.exports = connect()(Network)
 
 inherits(Network, Component)
 
-function Network () {
+function Network() {
   Component.call(this)
 }
 
@@ -35,7 +35,7 @@ Network.prototype.render = function () {
   let iconName
   let hoverText
 
-  if (providerName === 'mainnet') {
+  if (providerName === 'mainnet' || providerName === 'in3_mainnet') {
     hoverText = context.t('mainnet')
     iconName = 'ethereum-network'
   } else if (providerName === 'ropsten') {
@@ -72,80 +72,80 @@ Network.prototype.render = function () {
         }
       },
     }, [
-      (function () {
-        switch (iconName) {
-          case 'ethereum-network':
-            return h('.network-indicator', [
-              h(NetworkDropdownIcon, {
-                backgroundColor: '#038789', // $blue-lagoon
-                nonSelectBackgroundColor: '#15afb2',
-                loading: networkNumber === 'loading',
-              }),
-              h('.network-name', context.t('mainnet')),
-              h('.network-indicator__down-arrow'),
-            ])
-          case 'ropsten-test-network':
-            return h('.network-indicator', [
-              h(NetworkDropdownIcon, {
-                backgroundColor: '#e91550', // $crimson
-                nonSelectBackgroundColor: '#ec2c50',
-                loading: networkNumber === 'loading',
-              }),
-              h('.network-name', context.t('ropsten')),
-              h('.network-indicator__down-arrow'),
-            ])
-          case 'kovan-test-network':
-            return h('.network-indicator', [
-              h(NetworkDropdownIcon, {
-                backgroundColor: '#690496', // $purple
-                nonSelectBackgroundColor: '#b039f3',
-                loading: networkNumber === 'loading',
-              }),
-              h('.network-name', context.t('kovan')),
-              h('.network-indicator__down-arrow'),
-            ])
-          case 'rinkeby-test-network':
-            return h('.network-indicator', [
-              h(NetworkDropdownIcon, {
-                backgroundColor: '#ebb33f', // $tulip-tree
-                nonSelectBackgroundColor: '#ecb23e',
-                loading: networkNumber === 'loading',
-              }),
-              h('.network-name', context.t('rinkeby')),
-              h('.network-indicator__down-arrow'),
-            ])
-          case 'goerli-test-network':
-            return h('.network-indicator', [
-              h(NetworkDropdownIcon, {
-                backgroundColor: '#3099f2', // $dodger-blue
-                nonSelectBackgroundColor: '#ecb23e',
-                loading: networkNumber === 'loading',
-              }),
-              h('.network-name', context.t('goerli')),
-              h('.network-indicator__down-arrow'),
-            ])
-          default:
-            return h('.network-indicator', [
-              networkNumber === 'loading'
-                ? h('span.pointer.network-loading-spinner', {
-                  onClick: (event) => this.props.onClick(event),
-                }, [
-                  h('img', {
-                    title: context.t('attemptingConnect'),
-                    src: 'images/loading.svg',
-                  }),
-                ])
-                : h('i.fa.fa-question-circle.fa-lg', {
-                  style: {
-                    color: 'rgb(125, 128, 130)',
-                  },
+        (function () {
+          switch (iconName) {
+            case 'ethereum-network':
+              return h('.network-indicator', [
+                h(NetworkDropdownIcon, {
+                  backgroundColor: '#038789', // $blue-lagoon
+                  nonSelectBackgroundColor: '#15afb2',
+                  loading: networkNumber === 'loading',
                 }),
+                h('.network-name', context.t('mainnet')),
+                h('.network-indicator__down-arrow'),
+              ])
+            case 'ropsten-test-network':
+              return h('.network-indicator', [
+                h(NetworkDropdownIcon, {
+                  backgroundColor: '#e91550', // $crimson
+                  nonSelectBackgroundColor: '#ec2c50',
+                  loading: networkNumber === 'loading',
+                }),
+                h('.network-name', context.t('ropsten')),
+                h('.network-indicator__down-arrow'),
+              ])
+            case 'kovan-test-network':
+              return h('.network-indicator', [
+                h(NetworkDropdownIcon, {
+                  backgroundColor: '#690496', // $purple
+                  nonSelectBackgroundColor: '#b039f3',
+                  loading: networkNumber === 'loading',
+                }),
+                h('.network-name', context.t('kovan')),
+                h('.network-indicator__down-arrow'),
+              ])
+            case 'rinkeby-test-network':
+              return h('.network-indicator', [
+                h(NetworkDropdownIcon, {
+                  backgroundColor: '#ebb33f', // $tulip-tree
+                  nonSelectBackgroundColor: '#ecb23e',
+                  loading: networkNumber === 'loading',
+                }),
+                h('.network-name', context.t('rinkeby')),
+                h('.network-indicator__down-arrow'),
+              ])
+            case 'goerli-test-network':
+              return h('.network-indicator', [
+                h(NetworkDropdownIcon, {
+                  backgroundColor: '#3099f2', // $dodger-blue
+                  nonSelectBackgroundColor: '#ecb23e',
+                  loading: networkNumber === 'loading',
+                }),
+                h('.network-name', context.t('goerli')),
+                h('.network-indicator__down-arrow'),
+              ])
+            default:
+              return h('.network-indicator', [
+                networkNumber === 'loading'
+                  ? h('span.pointer.network-loading-spinner', {
+                    onClick: (event) => this.props.onClick(event),
+                  }, [
+                      h('img', {
+                        title: context.t('attemptingConnect'),
+                        src: 'images/loading.svg',
+                      }),
+                    ])
+                  : h('i.fa.fa-question-circle.fa-lg', {
+                    style: {
+                      color: 'rgb(125, 128, 130)',
+                    },
+                  }),
 
-              h('.network-name', providerName === 'localhost' ? context.t('localhost') : providerNick || context.t('privateNetwork')),
-              h('.network-indicator__down-arrow'),
-            ])
-        }
-      })(),
-    ])
+                h('.network-name', providerName === 'localhost' ? context.t('localhost') : providerNick || context.t('privateNetwork')),
+                h('.network-indicator__down-arrow'),
+              ])
+          }
+        })(),
+      ])
   )
 }
