@@ -14,7 +14,7 @@ module.exports = createIn3Client
 function createIn3Client({ chain }) {
   const client = new in3.default({ chainId: chain })
   const fetchMiddleware = createAsyncMiddleware(async (req, res, next) => {
-    res.result = await in3.send(req)
+    res.result = await client.send(req)
     if (res.result && res.result.error) throw new JsonRpcError.InternalError(res.result.error)
   })
   const blockProvider = providerFromMiddleware(fetchMiddleware)
